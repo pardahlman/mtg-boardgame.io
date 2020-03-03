@@ -1,25 +1,28 @@
 import { Client } from 'boardgame.io/client';
+import { Local } from 'boardgame.io/multiplayer';
 import { game } from './game';
 
 it('should declare player 1 as the winner', () => {
   // Arrange
-  const scenario = {
-    ...game,
+  const spec = {
+    game,
+    multiplayer: Local(),
     setup: () => ({
     }),
   };
 
-  const client = Client({
-    game: scenario,
-  });
+  const p0 = Client({ ...spec, playerID: '0' });
+  const p1 = Client({ ...spec, playerID: '1' });
+
+  p0.start();
+  p1.start();
 
   // Act
   // make some game moves
-  client.moves.clickCell(8);
-  client.moves.clickCell(5);
+  p0.moves.passPriority();
 
   // get the latest game state
-  const { G, ctx } = client.store.getState();
+  const { G, ctx } = p1.getState();
 
   // Assert
   // the board should look like this now

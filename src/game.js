@@ -1,6 +1,6 @@
-const game = {
-    moves: {
-      clickCell: (G, ctx, payload) => {
-      },
-    }
-  };
+export const game = {
+  moves: {
+    passPriority: (G, ctx, payload) => {
+    },
+  }
+};
