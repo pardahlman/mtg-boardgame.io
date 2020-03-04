@@ -1,10 +1,10 @@
 import React from 'react';
 import { Client } from 'boardgame.io/react';
 import { Local } from 'boardgame.io/multiplayer';
-import { game } from './game';
+import { mtg } from './mtg';
 
 const GameClient = Client({
-  game,
+  game: mtg,
   multiplayer: Local(),
 });
 
