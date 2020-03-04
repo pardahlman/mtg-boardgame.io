@@ -1,6 +1,6 @@
 import { castSpell } from './castSpell';
 
-export const game = {
+export const mtg = {
   setup: (ctx) => ({
 
   }),
