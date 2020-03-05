@@ -40,3 +40,17 @@ it("non-current player can not pass priority", () => {
   // Assert
   expect(p1.getState().ctx.currentPlayer).toBe("0");
 });
+
+it("when all players pass, the next phase starts", () => {
+  // Arrange
+  const { p0, p1 } = setup();
+  expect(p0.getState().ctx.phase).toBe("upkeep");
+
+  // Act
+  p0.moves.passPriority();
+  expect(p0.getState().ctx.phase).toBe("upkeep");
+  p1.moves.passPriority();
+
+  // Assert
+  expect(p0.getState().ctx.phase).toBe("draw");
+});
