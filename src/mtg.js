@@ -1,9 +1,7 @@
-import { putSpellOnTheStack } from './castSpell';
+import { putSpellOnTheStack } from "./castSpell";
 
 export const mtg = {
-  setup: (ctx) => ({
-
-  }),
+  setup: ctx => ({}),
   moves: {
     passPriority: (G, ctx, payload) => {
       ctx.events.endTurn();
