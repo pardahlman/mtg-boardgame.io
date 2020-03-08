@@ -1,4 +1,5 @@
 import { putSpellOnTheStack } from "./castSpell";
+import { playLand } from "./play-land";
 import { PluginPlayer } from "boardgame.io/plugins";
 
 const endIf = (G, ctx) => G.passedPriority.length === ctx.numPlayers;
@@ -29,6 +30,11 @@ export const mtg = {
       next: "upkeep",
       endIf,
       onEnd
+    },
+    preCombatMainPhase: {
+      moves: {
+        playLand
+      }
     }
   },
   plugins: [PluginPlayer]
