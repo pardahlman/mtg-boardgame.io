@@ -3,7 +3,7 @@ import { Client } from "boardgame.io/react";
 import { Local } from "boardgame.io/multiplayer";
 import { mtg } from "./mtg";
 import logger from "redux-logger";
-import { applyMiddleware, compose } from "redux";
+import { applyMiddleware } from "redux";
 
 const Label = ({ name, value }) => (
   <div>
