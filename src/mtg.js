@@ -27,7 +27,7 @@ export const mtg = {
       onEnd
     },
     draw: {
-      next: "upkeep",
+      next: "preCombatMainPhase",
       endIf,
       onEnd
     },
