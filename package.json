@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.1",
-    "@testing-library/user-event": "^7.2.1",
-    "boardgame.io": "^0.37.2",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
+    "@testing-library/jest-dom": "4.2.4",
+    "@testing-library/react": "9.4.1",
+    "@testing-library/user-event": "7.2.1",
+    "boardgame.io": "0.37.2",
+    "react": "16.13.0",
+    "react-dom": "16.13.0",
     "react-scripts": "3.4.0",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "3.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -34,9 +34,9 @@
     ]
   },
   "devDependencies": {
-    "husky": "^4.2.3",
+    "husky": "4.2.3",
     "prettier": "1.19.1",
-    "pretty-quick": "^2.0.1"
+    "pretty-quick": "2.0.1"
   },
   "husky": {
     "hooks": {
