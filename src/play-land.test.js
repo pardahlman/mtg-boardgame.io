@@ -3,14 +3,14 @@ import { Local } from "boardgame.io/multiplayer";
 import { mtg } from "./mtg";
 import { LAND } from "./permanents";
 
-const setup = playerStates => {
-  const game = { ...mtg };
+const setup = setupOverrides => {
+  const G = { ...mtg };
   const spec = {
-    game,
+    game: G,
     multiplayer: Local()
   };
 
-  setPlayerStates(game, playerStates);
+  setPlayerStates({ G, setupOverrides });
 
   const p0 = Client({ ...spec, playerID: "0" });
   const p1 = Client({ ...spec, playerID: "1" });
@@ -20,7 +20,7 @@ const setup = playerStates => {
   return { p0, p1 };
 };
 
-const setPlayerStates = (G, setupOverrides) => {
+const setPlayerStates = ({ G, setupOverrides }) => {
   const playerSetup = G.playerSetup;
   G.playerSetup = playerID => {
     const playerState = playerSetup(playerID);
