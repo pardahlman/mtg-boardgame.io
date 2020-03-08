@@ -32,6 +32,7 @@ export const mtg = {
       onEnd
     },
     preCombatMainPhase: {
+      next: "upkeep",
       moves: {
         playLand
       }
