@@ -3,7 +3,7 @@ import { Client } from "boardgame.io/react";
 import { Local } from "boardgame.io/multiplayer";
 import { mtg } from "./mtg";
 import logger from "redux-logger";
-import { applyMiddleware } from "redux";
+import { applyMiddleware, compose } from "redux";
 
 const Label = ({ name, value }) => (
   <div>
@@ -22,7 +22,10 @@ const MtgClient = Client({
       <button onClick={() => props.moves.passPriority()}>passPriority</button>
     </div>
   ),
-  enhancer: applyMiddleware(logger)
+  enhancer: compose(
+    applyMiddleware(logger),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
 });
 
 const App = () => (
