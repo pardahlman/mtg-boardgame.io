@@ -22,10 +22,7 @@ const MtgClient = Client({
       <button onClick={() => props.moves.passPriority()}>passPriority</button>
     </div>
   ),
-  enhancer: compose(
-    applyMiddleware(logger),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+  enhancer: applyMiddleware(logger)
 });
 
 const App = () => (
