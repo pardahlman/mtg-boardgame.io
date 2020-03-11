@@ -11,7 +11,7 @@ const Label = ({ name, value }) => (
   </div>
 );
 
-const MtgClient = Client({
+export const MtgClient = Client({
   game: mtg,
   multiplayer: Local(),
   board: props => (

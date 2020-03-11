@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import App, { MtgClient } from "./App";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
+import { shallow } from "enzyme";
 
 const disableLogging = testCase => () => {
   jest.spyOn(console, "log").mockImplementation(() => {});
@@ -27,3 +28,8 @@ it(
     expect(getByText("playerID - 1")).toBeInTheDocument();
   })
 );
+
+it("renders 2 MtgClients", () => {
+  const wrapper = shallow(<App />);
+  expect(wrapper.find(MtgClient).length).toBe(2);
+});
