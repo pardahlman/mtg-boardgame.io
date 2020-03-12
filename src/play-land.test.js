@@ -1,12 +1,18 @@
 import { Client } from "boardgame.io/client";
 import { Local } from "boardgame.io/multiplayer";
-import { mtg } from "./mtg";
 import { LAND } from "./permanents";
+import { playLand } from "./play-land";
+import { PluginPlayer } from "boardgame.io/plugins";
 
 const setup = setupOverrides => {
-  const G = { ...mtg };
+  const G = {
+    moves: { playLand },
+    playerSetup: id => ({ battlefield: [] }),
+    plugins: [PluginPlayer]
+  };
   const spec = {
     game: G,
+
     multiplayer: Local()
   };
 
