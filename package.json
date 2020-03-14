@@ -32,7 +32,10 @@
         "error",
         {
           "cases": {
-            "kebabCase": true
+            "kebabCase": true,
+            "ignore": [
+              "^setupTests\\.js$"
+            ]
           }
         }
       ]
