@@ -1,6 +1,6 @@
 import { Client } from "boardgame.io/client";
 import { Local } from "boardgame.io/multiplayer";
-import { LAND } from "./permanents";
+import { PERMANENT } from "./permanent";
 import { playLand } from "./play-land";
 import { PluginPlayer } from "boardgame.io/plugins";
 
@@ -65,7 +65,7 @@ it("should not accept card that is not a land", () => {
 
 it("should accept card of type LAND", () => {
   // Arrange
-  const landCard = { types: [LAND], instanceId: 1 };
+  const landCard = { types: [PERMANENT.LAND], instanceId: 1 };
   const { p0 } = setup({
     phase: "preCombatMainPhase",
     "0": state => ({ ...state, hand: [landCard], battlefield: [] })
@@ -82,8 +82,8 @@ it("should accept card of type LAND", () => {
 
 it("should only be able to play one land per turn", () => {
   // Arrange
-  const firstLand = { types: [LAND], instanceId: 1 };
-  const secondLand = { types: [LAND], instanceId: 2 };
+  const firstLand = { types: [PERMANENT.LAND], instanceId: 1 };
+  const secondLand = { types: [PERMANENT.LAND], instanceId: 2 };
   const { p0 } = setup({
     phase: "preCombatMainPhase",
     "0": state => ({ ...state, hand: [firstLand, secondLand], battlefield: [] })
