@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App, { MtgClient } from "./App";
+import App, { MtgClient } from "./app";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { shallow } from "enzyme";
