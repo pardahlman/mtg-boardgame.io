@@ -1,13 +1,13 @@
-import { PERMANENT } from "./permanent";
+import * as permanents from "./permanents";
 
-const getBattlefield = (G, ctx) => G.players[ctx.currentPlayer].battlefield;
+const getBattledfield = (G, ctx) => G.players[ctx.currentPlayer].battlefield;
 
-// used to determine if a spell can be payed for
+// used to determen if a spell can be payed for
 // and can be used in the UI to indicate which lands
 // will be tapped etc.
 const getDefaultPayment = (G, ctx, spell) => {
-  const untappedLands = getBattlefield(G, ctx).filter(
-    card => card.type === PERMANENT.LAND && !card.tapped
+  const untappedLands = getBattledfield(G, ctx).filter(
+    card => card.type === permanents.LAND && !card.tapped
   );
   if (untappedLands.length < spell.cost.length) {
     return;
@@ -33,7 +33,7 @@ export const payCostsOfSpell = (G, ctx, landsToTap) => {
     return;
   }
 
-  const battlefield = getBattlefield(G, ctx);
+  const battlefield = getBattledfield(G, ctx);
   if (!landsToTap.every(land => battlefield.some(c => c === land))) {
     return;
   }

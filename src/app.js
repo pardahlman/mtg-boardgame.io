@@ -17,6 +17,8 @@ const MtgClient = Client({
   board: props => (
     <div>
       <Label name="playerID" value={props.playerID}></Label>
+      <Label name="currentPlayer" value={props.ctx.currentPlayer}></Label>
+      <Label name="phase" value={props.ctx.phase}></Label>
       <button onClick={() => props.moves.passPriority()}>passPriority</button>
     </div>
   ),
