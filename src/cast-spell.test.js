@@ -1,4 +1,4 @@
-import { putSpellOnTheStack, payCostsOfSpell } from "./castSpell";
+import { putSpellOnTheStack, payCostsOfSpell } from "./cast-spell";
 
 describe("To cast a spell is to take it from where it is (usually the hand)", () => {
   test("put it on the stack", () => {

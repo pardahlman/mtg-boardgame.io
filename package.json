@@ -16,10 +16,24 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "plugins": [
+      "unicorn"
+    ],
+    "rules": {
+      "unicorn/filename-case": [
+        "error",
+        {
+          "cases": {
+            "kebabCase": true
+          }
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [
@@ -34,6 +48,8 @@
     ]
   },
   "devDependencies": {
+    "eslint": "6.8.0",
+    "eslint-plugin-unicorn": "17.2.0",
     "husky": "4.2.3",
     "prettier": "1.19.1",
     "pretty-quick": "2.0.1"
