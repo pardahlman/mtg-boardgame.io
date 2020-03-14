@@ -1,25 +1,5 @@
-import { Client } from "boardgame.io/client";
-import { Local } from "boardgame.io/multiplayer";
 import { STAGE } from "./stage";
-import { mtg } from "./mtg";
-
-const setup = () => {
-  const spec = {
-    game: { ...mtg },
-    numPlayers: 3,
-    multiplayer: Local()
-  };
-
-  const p0 = Client({ ...spec, playerID: "0" });
-  const p1 = Client({ ...spec, playerID: "1" });
-  const p2 = Client({ ...spec, playerID: "2" });
-
-  p0.start();
-  p1.start();
-  p2.start();
-  const getActivePlayers = () => p0.getState().ctx.activePlayers;
-  return { p0, p1, p2, getActivePlayers };
-};
+import { setup } from "./test-setup";
 
 it("when starting a game, the first player is the only active player, the others are awaiting priority", () => {
   // Arrange and Act
@@ -64,7 +44,7 @@ it("when the second player passes priority, the third player gets priority", () 
   expect(activePlayers[2]).toBe(STAGE.HASPRIORITY);
 });
 
-it("when all players have passed priority, the priorty state is reset", () => {
+it("when all players have passed priority, the priority state is reset", () => {
   // Arrange
   const { p0, p1, p2, getActivePlayers } = setup();
 

@@ -1,9 +1,10 @@
 import { PluginPlayer } from "boardgame.io/plugins";
 import { STAGE } from "./stage";
+import { getInitialStepState, setNextMagicStep } from "./steps";
 
 export const mtg = {
   setup: ctx => ({
-    currentStep: "untap"
+    ...getInitialStepState()
   }),
   playerSetup: playerID => ({ playerID }),
   turn: {
@@ -28,6 +29,7 @@ export const mtg = {
 
             let value;
             if (ctx.activePlayers[nextPlayerId] === STAGE.NULL) {
+              setNextMagicStep(G, ctx);
               value = ctx.playOrder.reduce(
                 (value, playerId) => ({
                   [playerId]: STAGE.AWAITINGPRIORITY,
