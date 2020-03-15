@@ -8,7 +8,7 @@ import "./index.css";
 
 const createMtgClient = ({ enhancer } = {}) =>
   Client({
-    game: mtg,
+    game: mtg(2),
     multiplayer: Local(),
     board: props => (
       <Fragment>
