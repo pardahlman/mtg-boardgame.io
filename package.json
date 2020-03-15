@@ -32,10 +32,7 @@
         "error",
         {
           "cases": {
-            "kebabCase": true,
-            "ignore": [
-              "^setupTests\\.js$"
-            ]
+            "kebabCase": true
           }
         }
       ]
@@ -64,5 +61,10 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
+  },
+  "jest": {
+    "setupFiles": [
+      "./jest-setup-file.js"
+    ]
   }
 }
