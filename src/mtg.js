@@ -1,60 +1,24 @@
-import { PluginPlayer } from "boardgame.io/plugins";
 import { STAGE } from "./stage";
-import { getInitialStepState, setNextMagicStep } from "./steps";
+import { getInitialStepState } from "./steps";
+import { activateManaAbility } from "./activateManaAbility";
+import { passPriority, resetPriority } from "./priority";
+import { playerSetup } from "./player";
 
-export const mtg = {
+export const mtg = numPlayers => ({
   setup: ctx => ({
-    ...getInitialStepState()
+    ...getInitialStepState(),
+    ...playerSetup(Array.from(Array(numPlayers).keys()))
   }),
-  playerSetup: playerID => ({ playerID }),
   turn: {
-    onBegin: (G, ctx) =>
-      ctx.events.setActivePlayers({
-        currentPlayer: STAGE.HASPRIORITY,
-        others: STAGE.AWAITINGPRIORITY
-      }),
+    onBegin: resetPriority,
     stages: {
       [STAGE.AWAITINGPRIORITY]: {},
       [STAGE.HASPRIORITY]: {
         moves: {
-          passPriority: (G, ctx) => {
-            const [activePlayerId] = Object.entries(ctx.activePlayers).find(
-              ([, value]) => value === STAGE.HASPRIORITY
-            );
-
-            const indexOfNextPlayer =
-              (ctx.playOrder.indexOf(activePlayerId) + 1) %
-              ctx.playOrder.length;
-            const nextPlayerId = ctx.playOrder[indexOfNextPlayer];
-
-            let value;
-            if (ctx.activePlayers[nextPlayerId] === STAGE.NULL) {
-              setNextMagicStep(G, ctx);
-              value = ctx.playOrder.reduce(
-                (value, playerId) => ({
-                  [playerId]: STAGE.AWAITINGPRIORITY,
-                  ...value
-                }),
-                { [nextPlayerId]: STAGE.HASPRIORITY }
-              );
-            } else {
-              value = {
-                ...ctx.activePlayers,
-                [activePlayerId]: STAGE.NULL,
-                [nextPlayerId]: STAGE.HASPRIORITY
-              };
-            }
-
-            ctx.events.setActivePlayers({
-              value,
-              next: {
-                current: ctx.activePlayers[ctx.currentPlayer]
-              }
-            });
-          }
+          activateManaAbility,
+          passPriority
         }
       }
     }
-  },
-  plugins: [PluginPlayer]
-};
+  }
+});

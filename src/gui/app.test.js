@@ -4,13 +4,7 @@ import { App } from "./app";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { shallow } from "enzyme";
-
-const disableLogging = testCase => () => {
-  jest.spyOn(console, "log").mockImplementation(() => {});
-  jest.spyOn(console, "group").mockImplementation(() => {});
-  testCase();
-  jest.restoreAllMocks();
-};
+import { disableLogging } from "../test-setup";
 
 it(
   "renders without crashing",

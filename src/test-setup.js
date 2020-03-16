@@ -2,10 +2,18 @@ import { Client } from "boardgame.io/client";
 import { Local } from "boardgame.io/multiplayer";
 import { mtg } from "./mtg";
 
+export const disableLogging = testCase => () => {
+  jest.spyOn(console, "log").mockImplementation(() => {});
+  jest.spyOn(console, "group").mockImplementation(() => {});
+  testCase();
+  jest.restoreAllMocks();
+};
+
 export const setup = () => {
+  const numPlayers = 3;
   const spec = {
-    game: { ...mtg },
-    numPlayers: 3,
+    game: { ...mtg(numPlayers) },
+    numPlayers,
     multiplayer: Local()
   };
 
@@ -20,6 +28,8 @@ export const setup = () => {
   const getActivePlayers = () => p0.getState().ctx.activePlayers;
   const getCurrentStep = () => p0.getState().G.currentStep;
   const getCurrentTurn = () => p0.getState().ctx.turn;
+  const getPlayerState = player =>
+    player.getState().G.players[allPlayers.indexOf(player)];
   return {
     p0,
     p1,
@@ -27,6 +37,7 @@ export const setup = () => {
     getActivePlayers,
     getCurrentStep,
     allPlayers,
-    getCurrentTurn
+    getCurrentTurn,
+    getPlayerState
   };
 };
