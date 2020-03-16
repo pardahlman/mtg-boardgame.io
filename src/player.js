@@ -21,5 +21,10 @@ const getAllCardsOnTheBattlefield = G =>
     []
   );
 
+export const isOnTheBattlefield = (G, card) =>
+  getAllCardsOnTheBattlefield(G).find(
+    c => c.cardInstanceId === card.cardInstanceId
+  );
+
 export const getCardByCardInstanceId = (G, cardInstanceId) =>
   getAllCardsOnTheBattlefield(G).find(c => c.cardInstanceId === cardInstanceId);
