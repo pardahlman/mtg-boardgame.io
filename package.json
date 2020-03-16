@@ -33,7 +33,7 @@
         {
           "cases": {
             "kebabCase": true,
-            "camelCase": true,
+            "camelCase": true
           }
         }
       ]
