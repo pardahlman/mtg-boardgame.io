@@ -33,9 +33,7 @@
         {
           "cases": {
             "kebabCase": true,
-            "ignore": [
-              "^setupTests\\.js$"
-            ]
+            "camelCase": true,
           }
         }
       ]
