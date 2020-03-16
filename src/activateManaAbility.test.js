@@ -4,7 +4,7 @@ it("when the active player taps a forest for mana, that player adds one {G} to h
   // Arrange
   const { p0, getPlayerState } = setup();
   const playerState = getPlayerState(p0);
-  expect(playerState.manapool.green).toBe(0);
+  expect(playerState.manaPool.green).toBe(0);
   const forest = playerState.battlefield.find(c => c.cardName === "Forest");
 
   // Act
@@ -14,7 +14,7 @@ it("when the active player taps a forest for mana, that player adds one {G} to h
   });
 
   // Assert
-  expect(getPlayerState(p0).manapool.green).toBe(1);
+  expect(getPlayerState(p0).manaPool.green).toBe(1);
 });
 
 it(
@@ -23,7 +23,7 @@ it(
     // Arrange
     const { p1, getPlayerState } = setup();
     const playerState = getPlayerState(p1);
-    expect(playerState.manapool.green).toBe(0);
+    expect(playerState.manaPool.green).toBe(0);
     const forest = playerState.battlefield.find(c => c.cardName === "Forest");
 
     // Act
@@ -33,6 +33,6 @@ it(
     });
 
     // Assert
-    expect(getPlayerState(p1).manapool.green).toBe(0);
+    expect(getPlayerState(p1).manaPool.green).toBe(0);
   })
 );

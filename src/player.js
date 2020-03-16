@@ -6,7 +6,7 @@ export const playerSetup = playerIDs => ({
       ...players,
       [playerID]: {
         battlefield: [createForest()],
-        manapool: {
+        manaPool: {
           green: 0
         }
       }

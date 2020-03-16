@@ -17,7 +17,7 @@ export const createForest = () => ({
         return true;
       },
       resolve: (G, ctx, { idOfPlayerWithPriority }) => {
-        G.players[idOfPlayerWithPriority].manapool.green += 1;
+        G.players[idOfPlayerWithPriority].manaPool.green += 1;
       }
     }
   ]
