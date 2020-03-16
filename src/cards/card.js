@@ -1,5 +1,5 @@
-let cardId = 0;
+let cardInstanceId = 0;
 
 export const createCard = () => ({
-  cardId: cardId++
+  cardInstanceId: cardInstanceId++
 });

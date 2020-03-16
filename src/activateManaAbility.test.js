@@ -9,7 +9,7 @@ it("when the active player taps a forest for mana, that player adds one {G} to h
 
   // Act
   p0.moves.activateManaAbility({
-    cardId: forest.cardId,
+    cardInstanceId: forest.cardInstanceId,
     abilityId: forest.activatedManaAbilities[0].abilityId
   });
 
@@ -28,7 +28,7 @@ it(
 
     // Act
     p1.moves.activateManaAbility({
-      cardId: forest.cardId,
+      cardInstanceId: forest.cardInstanceId,
       abilityId: forest.activatedManaAbilities[0].abilityId
     });
 

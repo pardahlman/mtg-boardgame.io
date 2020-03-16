@@ -21,5 +21,5 @@ const getAllCardsOnTheBattlefield = G =>
     []
   );
 
-export const getCardByCardId = (G, cardId) =>
-  getAllCardsOnTheBattlefield(G).find(c => c.cardId === cardId);
+export const getCardByCardInstanceId = (G, cardInstanceId) =>
+  getAllCardsOnTheBattlefield(G).find(c => c.cardInstanceId === cardInstanceId);

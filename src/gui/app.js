@@ -27,10 +27,10 @@ const createMtgClient = ({ enhancer } = {}) =>
           )
           .map(({ card, ability }) => (
             <button
-              key={`${card.cardId}-${ability.abilityId}`}
+              key={`${card.cardInstanceId}-${ability.abilityId}`}
               onClick={() =>
                 props.moves.activateManaAbility({
-                  cardId: card.cardId,
+                  cardInstanceId: card.cardInstanceId,
                   abilityId: ability.abilityId
                 })
               }

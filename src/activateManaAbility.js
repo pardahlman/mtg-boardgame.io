@@ -1,11 +1,11 @@
-import { getCardByCardId } from "./player";
+import { getCardByCardInstanceId } from "./player";
 import { getIdOfPlayerWithPriority } from "./priority";
 
 const getActivatedManaAbilityFromCardByAbilityId = (card, abilityId) =>
   card.activatedManaAbilities.find(a => a.abilityId === abilityId);
 
-export const activateManaAbility = (G, ctx, { cardId, abilityId }) => {
-  const card = getCardByCardId(G, cardId);
+export const activateManaAbility = (G, ctx, { cardInstanceId, abilityId }) => {
+  const card = getCardByCardInstanceId(G, cardInstanceId);
   const ability = getActivatedManaAbilityFromCardByAbilityId(card, abilityId);
   const couldPay = ability.payCost(G, ctx, { card });
   if (couldPay) {
