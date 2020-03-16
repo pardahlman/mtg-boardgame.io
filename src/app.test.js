@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App, { MtgClient } from "./app";
+import { App } from "./app";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { shallow } from "enzyme";
@@ -31,5 +31,5 @@ it(
 
 it("renders 2 MtgClients", () => {
   const wrapper = shallow(<App />);
-  expect(wrapper.find(MtgClient).length).toBe(2);
+  expect(wrapper.children().length).toBe(2);
 });

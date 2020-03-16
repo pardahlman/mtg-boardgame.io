@@ -1,34 +1,33 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Client } from "boardgame.io/react";
 import { Local } from "boardgame.io/multiplayer";
 import { mtg } from "./mtg";
 import logger from "redux-logger";
 import { applyMiddleware } from "redux";
 
-const Label = ({ name, value }) => (
-  <div>
-    {name} - {value}
-  </div>
-);
+const createMtgClient = ({ enhancer } = {}) =>
+  Client({
+    game: mtg,
+    multiplayer: Local(),
+    board: props => (
+      <Fragment>
+        playerID - {props.playerID}
+        {Object.entries(props.moves).map(([key, value]) => (
+          <button key={key} onClick={() => value()}>
+            {key}
+          </button>
+        ))}
+      </Fragment>
+    ),
+    enhancer
+  });
 
-export const MtgClient = Client({
-  game: mtg,
-  multiplayer: Local(),
-  board: props => (
-    <div>
-      <Label name="playerID" value={props.playerID}></Label>
-      <Label name="currentPlayer" value={props.ctx.currentPlayer}></Label>
-      <Label name="phase" value={props.ctx.phase}></Label>
-      <button onClick={() => props.moves.passPriority()}>passPriority</button>
-    </div>
-  ),
-  enhancer: applyMiddleware(logger)
-});
+export const NoLogMtgClient = createMtgClient();
+export const MtgClient = createMtgClient({ enhancer: applyMiddleware(logger) });
 
-const App = () => (
-  <div>
+export const App = () => (
+  <Fragment>
     <MtgClient playerID="0" />
-    <MtgClient playerID="1" />
-  </div>
+    <NoLogMtgClient playerID="1" />
+  </Fragment>
 );
-export default App;
