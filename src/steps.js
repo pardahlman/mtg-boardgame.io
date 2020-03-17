@@ -14,7 +14,7 @@ export const STEP = {
 
 const allSteps = Object.values(STEP);
 
-export const getInitialStepState = () => ({ currentStep: allSteps[0] });
+export const stepSetup = () => ({ currentStep: allSteps[0] });
 
 export const setNextMagicStep = (G, ctx) => {
   const nextStepIndex = allSteps.indexOf(G.currentStep) + 1;

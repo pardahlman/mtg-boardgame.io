@@ -1,6 +1,11 @@
 import { Client } from "boardgame.io/client";
 import { Local } from "boardgame.io/multiplayer";
 import { mtg } from "./mtg";
+import { createForest } from "./cards/forest";
+import { createGrizzlyBears } from "./cards/grizzly-bears";
+import { player, playerSetup } from "./player";
+import { stepSetup } from "./steps";
+import { stackSetup } from "./stack";
 
 export const disableLogging = testCase => () => {
   jest.spyOn(console, "log").mockImplementation(() => {});
@@ -9,10 +14,29 @@ export const disableLogging = testCase => () => {
   jest.restoreAllMocks();
 };
 
-export const setup = () => {
+export const setup = ({ players } = {}) => {
   const numPlayers = 3;
+  const mtgGame = mtg(numPlayers);
+  const playerState = () => ({
+    battlefield: [createForest()],
+    hand: [createGrizzlyBears()],
+    manaPool: {
+      green: 0
+    }
+  });
   const spec = {
-    game: { ...mtg(numPlayers) },
+    game: {
+      ...mtgGame,
+      setup: ctx => ({
+        ...stepSetup(),
+        ...stackSetup(),
+        players: {
+          "0": player({ ...playerState(), ...(players["0"] || {}) }),
+          "1": player({ ...playerState(), ...(players["1"] || {}) }),
+          "2": player({ ...playerState(), ...(players["2"] || {}) })
+        }
+      })
+    },
     numPlayers,
     multiplayer: Local()
   };

@@ -1,53 +1,22 @@
-import { putSpellOnTheStack, payCostsOfSpell } from "./cast-spell";
+import { setup } from "./test-setup";
+import { getAllCardsOnTheBattlefield } from "./player";
 
-describe("To cast a spell is to take it from where it is (usually the hand)", () => {
-  test("put it on the stack", () => {
-    // Arrange
-    const G = { stack: [], players: { "0": { battlefield: [] } } };
-    const ctx = { currentPlayer: "0" };
-    const spell = { cost: [] };
+it("when the player casts a spell, that card is removed from her hand", () => {
+  // Arrange
+  const { p0, getPlayerState } = setup({
+    players: { "0": { manaPool: { green: 1, colorless: 1 } } }
+  });
+  const playerState = getPlayerState(p0);
+  expect(getPlayerState(p0).hand.length).toBe(1);
+  const grizzlyBears = playerState.hand.find(
+    c => c.cardName === "Grizzly Bears"
+  );
 
-    //Act
-    putSpellOnTheStack(G, ctx, spell);
-
-    //Assert
-    expect(G.stack).toContain(spell);
+  // Act
+  p0.moves.castSpell({
+    cardInstanceId: grizzlyBears.cardInstanceId
   });
 
-  test("pay its costs", () => {
-    // Arrange
-    const spell = { cost: [{ color: "blue" }, { color: "blue" }] };
-    const firstLand = { tapped: false };
-    const secondLand = { tapped: false };
-    const thridLand = { tapped: false };
-    const G = {
-      stack: [spell],
-      players: {
-        "0": {
-          battlefield: [firstLand, secondLand]
-        }
-      }
-    };
-    const ctx = { currentPlayer: "0" };
-
-    // Act
-    payCostsOfSpell(G, ctx, [firstLand, secondLand]);
-
-    expect(firstLand.tapped).toBeTruthy();
-    expect(secondLand.tapped).toBeTruthy();
-    expect(thridLand.tapped).toBeFalsy();
-  });
-
-  test("unpayable costs cant be payed", () => {
-    // Arrange
-    const G = { stack: [], players: { "0": { battlefield: [] } } };
-    const ctx = { currentPlayer: "0" };
-    const spell = { cost: [{ color: "blue" }] };
-
-    //Act
-    putSpellOnTheStack(G, ctx, spell);
-
-    //Assert
-    expect(G.stack.length).toBe(0);
-  });
+  // Assert
+  expect(getPlayerState(p0).hand.length).toBe(0);
 });
