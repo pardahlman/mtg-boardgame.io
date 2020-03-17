@@ -6,9 +6,10 @@ import logger from "redux-logger";
 import { applyMiddleware } from "redux";
 import "./index.css";
 
+const game = mtg(2);
 const createMtgClient = ({ enhancer } = {}) =>
   Client({
-    game: mtg(2),
+    game,
     multiplayer: Local(),
     board: props => (
       <Fragment>
