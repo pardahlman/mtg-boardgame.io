@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.stack,
+.battlefield,
+.hand {
+  display: flex;
+  flex-direction: row;
+}
+
+.objectOnTheStack,
+.cardOnTheBattlefield,
+.cardInHand {
+  padding: 2px;
+  border: 1px solid black;
+}
+
+.objectOnTheStack {
+  border-color: red;
+}

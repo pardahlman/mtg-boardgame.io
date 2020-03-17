@@ -16,8 +16,8 @@ export const createForest = () => ({
         card.tapped = true;
         return true;
       },
-      resolve: (G, ctx, { idOfPlayerWithPriority }) => {
-        G.players[idOfPlayerWithPriority].manaPool.green += 1;
+      resolve: (G, ctx, { playerWithPriority }) => {
+        playerWithPriority.manaPool.green += 1;
       }
     }
   ]

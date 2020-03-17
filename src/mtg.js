@@ -1,13 +1,16 @@
 import { STAGE } from "./stage";
-import { getInitialStepState } from "./steps";
+import { stepSetup } from "./steps";
 import { activateManaAbility } from "./activateManaAbility";
 import { passPriority, resetPriority } from "./priority";
 import { playerSetup } from "./player";
+import { stackSetup } from "./stack";
+import { castSpell } from "./cast-spell";
 
 export const mtg = numPlayers => ({
   setup: ctx => ({
-    ...getInitialStepState(),
-    ...playerSetup(Array.from(Array(numPlayers).keys()))
+    ...stepSetup(),
+    ...playerSetup(Array.from(Array(numPlayers).keys())),
+    ...stackSetup()
   }),
   turn: {
     onBegin: resetPriority,
@@ -16,6 +19,7 @@ export const mtg = numPlayers => ({
       [STAGE.HASPRIORITY]: {
         moves: {
           activateManaAbility,
+          castSpell,
           passPriority
         }
       }

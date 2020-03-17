@@ -40,8 +40,10 @@ export const passPriority = (G, ctx) => {
   });
 };
 
-// This could possibly be added to G to avoid calling this method all the time
-export const getIdOfPlayerWithPriority = (G, ctx) =>
+const getIdOfPlayerWithPriority = (G, ctx) =>
   Object.entries(ctx.activePlayers).find(
     ([, value]) => value === STAGE.HASPRIORITY
   )[0];
+
+export const getPlayerWithPriority = (G, ctx) =>
+  G.players[getIdOfPlayerWithPriority(G, ctx)];

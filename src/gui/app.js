@@ -5,39 +5,27 @@ import { mtg } from "../mtg";
 import logger from "redux-logger";
 import { applyMiddleware } from "redux";
 import "./index.css";
+import { Hand } from "./hand";
+import { Battlefield } from "./battlefield";
+import { Stack } from "./stack";
 
+const game = mtg(2);
 const createMtgClient = ({ enhancer } = {}) =>
   Client({
-    game: mtg(2),
+    game,
     multiplayer: Local(),
     board: props => (
       <Fragment>
-        playerID - {props.playerID}
-        <button onClick={() => props.moves.passPriority()}>passPriority</button>
-        {props.G.players[props.playerID].battlefield
-          .reduce(
-            (prev, card) =>
-              prev.concat(
-                card.activatedManaAbilities.map(ability => ({
-                  card,
-                  ability
-                }))
-              ),
-            []
-          )
-          .map(({ card, ability }) => (
-            <button
-              key={`${card.cardInstanceId}-${ability.abilityId}`}
-              onClick={() =>
-                props.moves.activateManaAbility({
-                  cardInstanceId: card.cardInstanceId,
-                  abilityId: ability.abilityId
-                })
-              }
-            >
-              {card.cardName} - {ability.abilityName}
-            </button>
-          ))}
+        <div>
+          playerID - {props.playerID}{" "}
+          <button onClick={() => props.moves.passPriority()}>
+            passPriority
+          </button>
+        </div>
+        <Hand {...props} />
+        <Battlefield {...props} />
+        <Stack {...props} />
+        <hr />
       </Fragment>
     ),
     enhancer
