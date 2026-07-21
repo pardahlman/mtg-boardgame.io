@@ -9,7 +9,7 @@
     "boardgame.io": "0.37.2",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.2",
-    "react": "16.13.0",
+    "react": "16.14.0",
     "react-dom": "16.13.0",
     "react-scripts": "3.4.0",
     "react-test-renderer": "16.13.0",
